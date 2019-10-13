@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} sell{% endblock title %}
+{% block extra_Style %}
+.footer{display:none}
+.infor-mation h4, h5{color: #358692;}
+
+@media  screen and (min-width: 901px){
+              body{
+             padding-top:5%;
+                        }
+         }
+@media screen  and (max-width: 900px) and (min-width: 661px){
+                      body{
+             padding-top:5%;
+         }
+          }
+@media screen and (max-width: 660px) and (min-width: 321px){
+                  body{
+             padding-top:9%;
+         }
+         .infor-mation li{font-size: .8rem;}
+
+          }
+@media only screen and (max-width: 320px) {
+                body{
+             padding-top:18%;}
+             .infor-mation {margin-bottom: 0px;}
+             .infor-mation li{font-size: .7rem;}
+             
+        }
+{% endblock extra_Style %}
+
+{% block content %}
+<div class = "content-section jumbotron container" style="background-color:white">
+    <form method="POST">
+    {% csrf_token %}
+    <fieldset class ="form-group">
+    <legend class ="border-bottom mb-4">Sell your Books!</legend>
+    <h5 style="color:#F08700"> we will pay you upto 55% of cost price of your books, if conditions met</h4>
+    <div class="jumbotron container infor-mation">
+    <h4>Must read</h4><hr>
+    <li>If you have more than one books please submit request for only one book, our excecutive will handle all at your door, while picking it up.</li>
+    <li>Our delivery executive will arrive within 3 days of your submitted request and will be given prior notice to you</li>
+    <li>The price of the book will depend on the physical condition of the books and published year</li>
+    <br>
+    <h5>Don't worry! you will get best value of your book then the traditional shops</h5>
+        
+    </div>
+    {{ sellForm|crispy }}
+    </feildset>
+    <div class = "form-group">
+    <hr/>
+        <button class = "btn btn-success" type="submit" >Submit</button>
+        </div>
+    </form>
+{% endblock content %}

@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LogIn</title>
+    
+    <link rel="stylesheet" href=" {% static 'css/bootstrap/bootstrap.min.css' %}">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          
+</head>
+<body>
+
+    <div class = "content-section jumbotron container" style="background-color:white">
+    <form method="POST">
+    {% csrf_token %}
+    <fieldset class ="form-group">
+    <legend class ="border-bottom mb-4">Join Today!</legend>
+    {{ form|crispy }}
+    </feildset>
+    <div class = "form-group">
+        <button class = "btn btn-outline-info" type="submit" >Sign Up!</button>
+           <div>
+     <small class = "test-muted">By creating an account you agree to our<a class ="ml-2" href="#">Terms & Privacy.</a>
+    </div>
+        </div>
+    </form>
+ 
+    <div class="border-top pt-3">
+        <small class = "test-muted">Already Have an Account?<a class ="ml-2" href="#" style="font-size:16px">Sign In</a>
+        </small>
+    </div>
+
+    </div>
+</body>
+</html>

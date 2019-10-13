@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block links%}
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock links%}
+{% block extra_Style %}
+html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+{% endblock extra_Style %}
+
+{% block content%}
+<div class="w3-theme-l5">
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
+      <!-- Profile -->
+      <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center">My Profile</h4>
+         <p class="w3-center"><img src="{% static '/images/team.svg' %}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         <hr>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>{{user.username}}</p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>{{user.profile.name}}</p>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{user.profile.city}}</p>
+        </div>
+      </div>
+      <br>
+      
+      <!-- Accordion -->
+      <div class="w3-card w3-round">
+        <div class="w3-white">
+          <button  class="w3-button w3-block w3-theme-l1 w3-left-align" onclick="openTab('order');"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> your Orders</button>
+          <hr style="margin: 0%">
+          <button class="w3-button w3-block w3-theme-l1 w3-left-align" onclick="openTab('address');"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Address</button>
+          <hr style="margin: 0%">
+          <button class="w3-button w3-block w3-theme-l1 w3-left-align" onclick="openTab('password');"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Password</button>
+          
+        </div>      
+      </div>
+      <br>
+      <!-- Alert Box -->
+      <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+        <p><strong>Hey!</strong></p>
+        <p>Have Used book?, Let us know, we can buy them!</p>
+        <p>Up to 50% of actual cost </p>
+      </div>
+    <!-- End Left Column -->
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7 containerTab" id="order">
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="/w3images/avatar2.png" alt="product" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">1 min</span>
+        <h4>morrish mano<span>      @ &#x20B9;</span></h4>  <br>
+          
+        <hr class="w3-clear">
+        <p>detail about the product  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="w3-row-padding" style="margin:0 -16px">
+            <div class="w3-half">
+                <button type="button" data-toggle="collapse" data-target="#demop"  class="btn btn-light btn-lg btn-block">Return</button>
+            </div>
+            <div class="w3-half">
+                <button type="button" data-toggle="collapse" data-target="#demop" class="btn btn-light btn-lg btn-block">Replace</button>
+          </div>
+          <h5 id="demop" class="collapse card" style="padding: 2%">Kindely wait for this service , we are in process!</h5>
+        </div>
+      </div>
+      
+    
+    </div>
+    <!-- the second one -->
+    <div class="w3-col m7 containerTab" style="display:none;" id="address">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <form method="POST" enctype="multipart/form-data ">
+            {% csrf_token %}
+            <fieldset class ="form-group">
+            <legend class ="border-bottom mb-4">update your Address</legend>
+            {{ updateForm|crispy }}
+            </feildset>
+            <div class = "form-group">
+                <button class = "btn btn-outline-success" type="submit" >Submit</button>
+                </div>
+            </form>
+         
+        </div>
+      </div>
+
+<!-- the third one -->
+      <div class="w3-col m7 containerTab" style="display:none;" id="password">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+           
+            
+          <hr class="w3-clear">
+          <p>detail about the product  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div class="w3-row-padding" style="margin:0 -16px">
+              <div class="w3-half">
+                  <button type="button"  class="btn btn-light btn-lg btn-block">Update</button>
+              </div>
+        </div>
+        </div>
+      <!-- End Middle Column -->
+      </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+</div>
+<script>
+    function openTab(tabName) {
+      var i, x;
+      x = document.getElementsByClassName("containerTab");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      document.getElementById(tabName).style.display = "block";
+    }
+    </script>
+
+{% endblock content%}

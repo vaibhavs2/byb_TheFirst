@@ -1,0 +1,136 @@
+#logotext{
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 4.5vmin; 
+    font-weight: 600;
+    font-style: italic  bold;
+    margin-right: 7%; }
+@media  screen and (min-width: 901px) and (max-width: 1440px){
+    #navbarIcon{
+        padding-bottom: 6px;
+        padding-top: 6px;}     
+    .footer .jumbotron{margin-bottom: 0%;
+            padding-bottom: 10px;
+            padding-top: 15px;}
+    .footer h4{font-size:  18px;
+            font-weight:  600}
+    .footer li,a{font-size: 14px;}
+    .footer .jumbotron button{font-size: 12px;}
+    .footer .jumbotron textarea {
+            width: 65%;
+            height: 70px;
+            font-size: 12px;}
+     #navbarTogglerDemo02 a{font-size: 18px; font-weight: 400;}
+        
+        }
+
+@media screen  and (max-width: 900px) and (min-width: 661px){   
+
+    #navbarIcon{
+        padding-bottom: 6px;
+        padding-top: 6px;}
+
+      .navbar{
+        padding-top:2px;
+        padding-bottom:2px;}
+        .footer .jumbotron{margin-bottom: 0%;
+            padding-bottom: 10px;
+            padding-top: 15px;}
+        #navbarTogglerDemo02 a{font-size: 16px; font-weight: 400;}
+        .footer h4{font-size:  18px;
+            font-weight:  600}
+        .footer li,a{font-size: 12px;}
+        .footer .jumbotron button{font-size: 10px;}
+        .footer .jumbotron textarea {
+              width: 90%;
+              height: 50px;
+              font-size: 12px;} 
+
+        }
+ @media screen and (max-width: 660px) and (min-width: 321px){ 
+    .navbar{
+        padding-top:2px;
+        padding-bottom:2px;}
+    .footer .jumbotron{margin-bottom: 0%;
+            padding-bottom: 10px;
+            padding-top: 15px;}
+
+    .footer h4{font-size:  16px;
+            font-weight:  600}
+    .footer li,a{font-size: 12px;}
+    .footer .jumbotron button{font-size: 8px;}
+    .footer .jumbotron textarea {
+              width: 100%;
+              height: 50px;
+              font-size: 12px;}
+    #navbarTogglerDemo02 a{font-size: 16px; font-weight: 400;}
+    
+
+ }
+
+ @media only screen and (max-width: 320px) {
+    .navbar{
+        padding-top:0px;
+        padding-bottom:0px;
+        padding-right: 10px;
+        padding-left: 10px; }
+
+        .footer .jumbotron{margin-bottom: 0%;
+            padding-bottom: 8px;
+            padding-top: 12px;}
+
+        .footer h4{font-size:  15px;
+            font-weight:  600}
+        .footer li,a{font-size: 10px;}
+        .footer .jumbotron button{font-size: 8px;}
+        .footer .jumbotron textarea {
+              width: 65%;
+              height: 40px;
+              font-size: 12px;}
+        #navbarTogglerDemo02 a{font-size: 16px; font-weight: 400;}
+        .text-area{margin-bottom: 1%;}
+ }
+
+ @media screen and (max-width: 580px){
+    #searchBox{display: none}
+    .navbar{
+        padding-top:2px;
+        padding-bottom:2px; }
+
+      .search-button{
+        border-width: 0px; }
+ }
+
+ @media screen and (min-width: 579px){
+    .search-button{
+        padding-left: 0px;
+        border-bottom:1px;
+        border-top:1px; 
+        border-right: 1px;
+        margin:0px;
+        border-left: 0px;
+        background-color: #28a745;
+        padding:7px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;}
+ }
+
+ @media screen and (max-width:991px){
+    #toggler1{
+       margin-left: 5px;}
+ }
+ #searchBox{
+    margin-right: 0px !important;
+    border-right: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  #navbarTogglerDemo02 ul>li{
+    font-family: 'Merienda', cursive;
+    font-style: bold;
+  }
+
+  .dropdown-menu  > a:hover, .dropdown-menu > a:focus {
+      background-color:#e8fced;}
+
+  .dropdown-item:active{
+      background-color: #92eec0;}

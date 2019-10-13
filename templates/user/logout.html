@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+    {% block title %}LoggedOut{% endblock title %}
+
+    {% block links %}
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        {% endblock links %}
+        {% block extra_Style %}
+        .footer { 
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+         }
+         body{
+             padding-top:15%;
+         }
+        {% endblock extra_Style %}
+
+{% block content %}
+
+    <div class = "content-section jumbotron container" style="background-color:white"> 
+    <div class="border-top pt-3">
+    <h2> You have been logged 0ut</h2>
+        <small class = "test-muted"><a href="#">Log In Again?</a>
+        </small>
+    </div>
+
+    </div>
+{% endblock content %}
