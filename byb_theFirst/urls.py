@@ -26,7 +26,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     url(r'theFirst/',include('theFirst.urls')),
     path('signUp/', user_views.register,name='register'),
-    path('logIn/', auth_views.LoginView.as_view(template_name = 'user/login.html'),name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name = 'user/login.html'),name='login'),
     path('logOut/', auth_views.LogoutView.as_view(template_name = 'user/logout.html') ,name='logout'),
     path('profile/', user_views.profile, name = 'profile'),
     path('sell/',sell_views.sellIndex, name = 'sellform' ),
