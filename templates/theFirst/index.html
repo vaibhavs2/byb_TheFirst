@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
  {% block links %}
- <link rel="stylesheet"  type"text/css"  href="{% static  'css/index.css' %}" >
+    <link rel="stylesheet"  type"text/css"  href="{% static  'css/index.css' %}" />
  {% endblock links %}
+
+ {% block extra_Style %}
+  <style>
+  #myfooter{
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+  </style>
+  {% endblock extra_Style %}
         {% block content %}
           <div id="carouselFirst" class="carousel slide" data-ride="carousel" >
               <ol class="carousel-indicators">
@@ -119,16 +128,16 @@
             </div> <!--good deals-->
 
             <div class="branch-table">
-            <div class="container-fluid" style="font-family: 'Merienda', cursive;"> <!-- list of books branches wise and best sellings-->
-                <div class="jumbotron"  style="background-color: white;">
+            <div class="container-fluid" style="font-family: 'Merienda', cursive; padding:0px; "> <!-- list of books branches wise and best sellings-->
+                <div class="jumbotron bg-dark" style="margin-bottom: 2px;">
                       
                   <div class="row">
                       <div class="column col-12 col-sm-6">
-                          <h4>Books by branch</h4>  
-                        <ul>
+                          <h4 style="color:#F08700">Books by branch</h4>  
+                        <ul class= "links">
                 
                           {% for branch in branches %}
-                              <li><a href="">{{ branch.branches }}</a></li>
+                              <li><a href="" >{{ branch.branches }}</a></li>
                               {% endfor %}
                               <ul>
                                 <li>And more... you can search in Topbar</li>
@@ -136,10 +145,10 @@
                         </ul>
                       </div>
                       <div class="column col-12 col-sm-6" >
-                          <h4>Best sellings</h4>
-                          <ul>
-                          {% for best in bestSelling%}
-                            <li><a href="">{{best.bookName}}(<span style="color:black">{{best.semester}}</span>)</a><span class="prince h5"> :&#x20B9;{{best.bookPrice}}</span> <span class="condition h5">{% if best.newedition%}New{% else %}Used{% endif %}</span></li>
+                          <h4 style="color:#F08700">Best sellings</h4>
+                          <ul class="links">
+                          {% for best in bestSelling %}
+                            <li><a href="">{{best.bookName}}(<span style="color:white">{{best.semester}}</span>)<span class="prince h5"> :&#x20B9;{{best.bookPrice}}</span> <span class="condition h5">{% if best.newedition%}New{% else %}Used{% endif %}</span></a></li>
                           {% endfor %}
                             </ul>
 
@@ -149,6 +158,7 @@
                 
               </div>
             </div><!--branch table end-->
+         
 
         {% endblock content %}
 

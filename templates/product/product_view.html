@@ -1,36 +1,159 @@
 {% extends 'base.html' %}
-{% load staticfiles%}
-{% block links%}
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     
 {% endblock links%}
 {% block extra_Style %}
+<style>
     body{
         padding-top:5%;
+        background-color:#343a40;
     }
+    .footer {
+   display: none;}
+   .products .card {
+            /* Add shadows to create the "card" effect */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+          }
+
+    .products .card:hover {
+            box-shadow: 0 10px 30px 10px rgb(0, 0, 0);}
     
+    .sameColor{
+      color: #8bf8ed;
+    }
+   
+    @media  screen and (min-width: 901px){
+        body{
+        padding-top:4%;
+                }
+        .card{border-width: 12px;}
+        .products{
+          padding :0.25rem;
+        }
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .products h5{
+      font-size: 16px;
+    }
+        .sem-ester{
+          font-size: 12.5px;
+        }
+        .sameColor{
+          font-size: 15px;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        }
+         }
+@media screen  and (max-width: 900px) and (min-width: 661px){
+        body{
+             padding-top:7%; }
+        .card{border-width: 10px;}
+        .products{
+          padding :0.14rem; }
+          #fluid{padding-left: 5px;
+          padding-right: 5px;}
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .products h5{
+      font-size: 14px;
+    }
+        .sem-ester{
+          font-size: 12.5px;
+        }
+        .sameColor{
+          font-size: 14px;
+           margin-bottom: 6px;
+          margin-top: 6px;
+        }
+      
+          }
+@media screen and (max-width: 660px) and (min-width: 321px){
+          body{
+             padding-top:13%;}
+        .card{border-width: 10px;}
+        .products{
+          padding :0.10rem; }
+
+          #fluid{padding-left: 3px;
+          padding-right: 3px;}
+
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;}
+
+        .products h5{
+      font-size: 13px;}
+
+        .sem-ester{
+          font-size: 12px;}
+        .btn-sm{
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+        .sameColor{
+          font-size: 12px;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        }
+          }
+@media only screen and (max-width: 320px) {
+                body{
+             padding-top:16%;}
+             
+        .card{border-width: 10px;}
+        .products{
+          padding :0.10rem; }
+
+          #fluid{padding-left: 3px;
+          padding-right: 3px;}
+
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;}
+
+        .products h5{
+      font-size: 13px;}
+
+        .sem-ester{
+          font-size: 12px;}
+        .btn-sm{
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+        .sameColor{
+          font-size: 12px;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        }
+            }
+
+</style>
+
 {% endblock extra_Style %}
 
 {% block content %}
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<div class="card col-4">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{% static 'images/team.svg' %}">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      <p><a href="#">This is a link</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+<hr>
+<div class="container-fluid" id="fluid">
+<div class="row" id="row">
+  {% for pro in products %}
+  <div class="col-sm-3  col-6 products">
+    <div class="card h-100 rounded border-dark bg-dark text-center" style="border-bottom-width: 0px;">
+      <img src="{{pro.image_url}}"  class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;">
+        <h5 class="sameColor">{{pro.branch}}<span class="sem-ester"style="color: whitesmoke" >({{pro.semester}})</span></h5>
+        <div class="form-inline">
+        <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
+        <a href="#" class="btn btn-outline-info btn-sm" style="margin-left:auto">+ cart</a>
+      </div>
     </div>
   </div>
+  {% endfor %}
+</div>
+</div>
 {% endblock content %}

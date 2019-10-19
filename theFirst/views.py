@@ -10,3 +10,10 @@ def index(request):
         'branches':branch.objects.all(),    }
     return render(request,'theFirst/index.html',context) 
 
+def help_page(request):
+    return render(request,'footers/help.html')
+
+def career_page(request):
+    return render(request,'footers/formCareer.html')
+def privacy_page(request):
+    return render(request,'footers/privacy.html')

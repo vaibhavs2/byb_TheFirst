@@ -6,12 +6,8 @@ from django.contrib.auth.models import User
 
 
 
-year_choices = (   
-                    (2016, 2016),
-                    (2017,2017),
-                    (2018, 2018),
-                    (2019, 2019),
-                 )
+year_choices = tuple((i,)*2 for i in range(datetime.date.today().year-3, datetime.date.today().year+1))
+
 
 
 def current_year():
