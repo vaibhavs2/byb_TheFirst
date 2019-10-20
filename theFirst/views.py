@@ -17,3 +17,7 @@ def career_page(request):
     return render(request,'footers/formCareer.html')
 def privacy_page(request):
     return render(request,'footers/privacy.html')
+def aboutUs_page(request):
+     return render(request,'footers/about_Us.html')
+def cart_page(request):
+    return render(request, 'footers/cart.html')

@@ -2,12 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
     {% block title %}LogIn{% endblock title %}
-
-    {% block links%}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% endblock links%}
     {% block extra_Style%}
     <style>
        .footer { 
@@ -51,7 +46,7 @@
     </form>
  
     <div class="border-top pt-3">
-        <small class = "test-muted">Need an Account?<a class ="ml-2" href="{url 'signUp'}">Sign Up</a>
+        <small class = "test-muted">Need an Account?<a class ="ml-2" href="{% url 'users:register' %}">Sign Up</a>
         </small>
     </div>
 

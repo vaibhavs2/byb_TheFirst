@@ -30,3 +30,7 @@ def profile(request):
         updateForm = updateUserForm(instance=request.user.profile)
         context = {'updateForm':updateForm,}
     return render(request, 'user/profile.html', context)
+
+
+def terms_condition(request):
+    return render(request, 'footers/privacy.html')

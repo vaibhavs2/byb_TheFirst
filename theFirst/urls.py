@@ -17,9 +17,12 @@ Including another URLconf
 from django.urls import path
 from theFirst import views
 from  django.conf.urls import url
+app_name = 'theFirst'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     path('help/',views.help_page, name='help'),
     path('careers/',views.career_page, name='career'),
     path('privacy/',views.privacy_page, name ='privacy'),
+    path('about_us/', views.aboutUs_page,name='aboutUs'),
+    path('cart/', views.cart_page, name='cart'),
 ]

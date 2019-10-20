@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_Style %}
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   padding-bottom:10px;
+   padding-top:10px;
+}
+body{
+        background-color:#343a40;   }
+   
+@media  screen and (min-width: 901px){
+        body{
+        padding-top:6%;}
+        .about img{
+                 height: 100px;
+                 width: 90px;}
+        
+         }
+@media screen  and (max-width: 900px) and (min-width: 661px){
+        body{
+             padding-top:7%; }
+             .about img{
+                 height: 100px;
+                 width: 85px;}
+
+            .about h4{
+                font-size: 18px;
+            }
+
+          }
+
+@media screen and (max-width: 660px) and (min-width: 321px){
+          body{
+             padding-top:17%;}
+             .about img{
+                 height: 100px;
+                 width: 85px;}
+
+            .about h4{
+                font-size: 16px;
+            }
+
+          }
+
+
+@media only screen and (max-width: 320px) {
+    body{
+            padding-top:20%; }
+             .about img{
+                 height: 90px;
+                 width: 75px;}
+
+            .about h4{
+                font-size: 14px;
+            }
+
+            }
+
+</style>
+
+{% endblock extra_Style %}
+
+{% block content %}
+        <div class="jumbotron about">
+            <img src="{% static 'images/heis.svg' %}" class="rounded float-left" alt="He is">
+            <img src="{% static 'images/Iam.svg' %}" class="rounded float-left" alt="I am">
+    </div>
+    <div class="float-right px-3 text-center about mt-3">
+    <h4>I am undergrad at Cluster Innovation Centre (University of Delhi)</h4>
+    <h4>        He made me interested in business!</h4></div>
+<hr/>
+{% endblock content %}

@@ -7,3 +7,5 @@ def product_view(request):
     context = {
                 'products' : Product.objects.all() , }
     return render(request,'product/product_view.html', context=context) 
+def product_detail(request):
+    return render(request, 'product/product_detail.html')
