@@ -134,21 +134,40 @@
 {% endblock extra_Style %}
 
 {% block content %}
-<hr>
+<hr/>
 <div class="container-fluid" id="fluid">
+<input href="{% url 'theFirst:cart'%}" id="cartBtn" type="button"  class=" btn btn-primary btn-block btn-sm" value="Go to cart" style="display: none;">
+
 <div class="row" id="row">
   {% for pro in products %}
   <div class="col-sm-3  col-6 products">
     <div class="card h-100 rounded border-dark bg-dark text-center" style="border-bottom-width: 0px;">
-      <img src="{{pro.image_url}}"  class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;">
-        <h5 class="sameColor">{{pro.branch}}<span class="sem-ester"style="color: #F49F0A" >({{pro.semester}})</span></h5>
-        <div class="form-inline">
-        <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
-        <a href="#" class="btn btn-outline-info btn-sm" style="margin-left:auto">+ cart</a>
+      {% comment %} <img src="{{pro.image_url}}"  class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;"> {% endcomment %}
+      <img id="currentPhoto" src="{{pro.image_url}}" onerror="this.onerror = null; this.src='{% static 'images/byb.svg' %}'" class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;">
+          <h5 class="sameColor">{{pro.branch}}<span class="sem-ester" style="color: #F49F0A">({{pro.semester}})</span></h5>
+          <a href="{% url  'product:productDetail' %}" class="stretched-link"></a>
+          <div class="form-inline">
+          <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
+          <input href="#" id="cartBtn{{forloop.counter}}" type="button"  onclick="onClicked_Add({{forloop.counter}})" class="btn btn-outline-info btn-sm" value="+ cart" style="margin-left:auto; z-index:2; position:relative;">
       </div>
     </div>
   </div>
   {% endfor %}
 </div>
 </div>
+
+<script>
+function onClicked_Add(buttonId) {
+  var stat = document.getElementById("cartBtn"+buttonId);
+  if (stat.value=="+ cart")
+    document.getElementById("cartBtn"+buttonId).value = "Added";
+  else 
+  document.getElementById("cartBtn"+buttonId).value = "+ cart";
+  if(window.innerWidth > 992)
+    document.getElementById("cartBtn").style.display = 'none';
+  else
+    document.getElementById("cartBtn").style.display = 'block';
+  
+}
+</script>
 {% endblock content %}

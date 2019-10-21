@@ -2,8 +2,8 @@
 {% load static %}
       <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-         <title> {% block title %} {% endblock title%} </title>
+          <title> {% block title %} {% endblock title%} </title>
+          <link rel = "icon" href = "{% static 'images/byb.svg'%}" type = "image/x-icon"> 
           <link rel="stylesheet" href=" {% static 'css/bootstrap/bootstrap.min.css' %}">
           <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif&display=swap" rel="stylesheet">        
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -71,6 +71,7 @@
                           {% endif %}
                              
           {% block content %} {% endblock content %}
+         
 
              <!-- footer-->
           <footer id="myfooter" class="bg-dark text-white-50 footer">

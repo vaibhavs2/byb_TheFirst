@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import GoodDeals, bestSelling, branch
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -19,5 +20,7 @@ def privacy_page(request):
     return render(request,'footers/privacy.html')
 def aboutUs_page(request):
      return render(request,'footers/about_Us.html')
+
+@login_required
 def cart_page(request):
     return render(request, 'footers/cart.html')

@@ -2,22 +2,192 @@
 {% load static %}
 {% block extra_Style %}
 <style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   padding-top:10px;
+}
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+
+
+
+ img {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease; 
+    -ms-transition: all 1s ease; 
+    -o-transition: all 1s ease; 
+    transition: all 1s ease;
+}
+
+.carousel-control-next, .carousel-control-prev{      
+              top: 45%;            
+             height: 10%;
+              width: 10%;} 
+
+.carousel-item:hover img {
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+     transform:scale(1.25);
+}
+
+
+@media  screen and (min-width: 901px){
+    body{
+    padding-top:7%;
+            }
+    .carousel-inner img{
+        opacity: 1; 
+        object-fit: contain;
+        width:100%;
+        height:325px; }
+                    }
+
+@media screen  and (max-width: 900px) and (min-width: 661px){
+                    body{
+            padding-top:12%;
+        }
+        .carousel-inner img{
+        opacity: 1; 
+        object-fit: contain;
+        width:100%;
+        height:325px; }
+    
+}
+@media screen and (max-width: 660px) and (min-width: 321px){
+    body{
+            padding-top:15%;
+        }
+        .carousel-inner img{
+        opacity: 1; 
+        object-fit: contain;
+        width:100%;
+        height:225px; }
+     }
+
+
+@media only screen and (max-width: 450px) and (min-width: 350px){
 body{
-    padding-top:7%;}
+            padding-top:20%;
+            padding-bottom: 50%;
+        }
+
+}
+@media only screen and (max-width: 350px){
+body{
+        padding-top:25%;
+    padding-bottom: 35%;}
+        .carousel-inner img{
+        opacity: 1; 
+        object-fit: contain;
+        width:100%;
+        height:225px; }
+        h1{font-size: 22px;}
+        h5{
+            font-size: 16px;
+        }
+    .carousel-item:hover img {
+        -webkit-transform:scale(1.8);
+        -moz-transform:scale(1.8);
+        -ms-transform:scale(1.8);
+        -o-transform:scale(1.8);
+        transform:scale(1.8);
+    }
+
+
+
+}
+
+
+ .carousel-indicators li {
+              width: 8px;
+              height: 8px;
+              border-radius: 100%;}  
 </style>
 {% endblock extra_Style %}
 <hr/>
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-    <div class="col-sm-4 col-12">
-        <img src="https://image.shutterstock.com/image-photo/colorful-flower-on-dark-tropical-260nw-721703848.jpg" width="100%" alt="">
+    <div class="col-sm-5 col-12">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img src="{% static 'images/bookForweb.jpg'%}" alt="First">
+                </div>
+                <div class="carousel-item">
+                <img src="{% static 'images/team.svg'%}"  alt="Second">
+                </div>
+                <div class="carousel-item">
+                <img src="{% static 'images/Iam.svg'%}" alt="Third">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+
+            </div>
+    </div> <!--sdfghjkdfgjkl-->
+    <div class="col-sm-7 col-12">
+        <div class="container bg-light ">
+        <h1>title of book</h1>
+        <div class="form-inline ">
+        <h5>Price</h5>
+        <h5 class="px-2" style="text-decoration-line: line-through">original price</h5>
+            </div>
+<div class="form-inline ">
+    <h5>year of book</h5>
+    <h5 class="px-2">status new</h5>
+</div>
+
+<div class="form-inline">
+        <h5 >semester</h5>
+        <h5 class="px-2">branch</h5>
+</div>
+        
+        <small class="text-center">Elements after a floating element will flow around it. To avoid this, use the clear property or the clearfix hack (see example at the bottom of this page).</small><br><hr/>
+        <input href="#" id="cBtn" type="button"  onclick="onClicked_Add()" class="btn btn-primary px-4" value="+ Cart">
+        <a href="{% url 'theFirst:cart' %}" id="cart" type="button"  class="btn btn-success mx-2" >Your Cart</a>
+        
     </div>
-    <div class="col-sm-8 col-12">
-        <h4></h4>
-        <h1>Hey tha; dsa</h1>
     </div>
 </div>
 </div>
+
+
+
+<script>
+function onClicked_Add() {
+        var stat = document.getElementById("cBtn");
+        if (stat.value=="+ Cart")
+            document.getElementById("cBtn").value = "Added";
+        else 
+          document.getElementById("cBtn").value = "+ Cart";
+          
+        }
+        </script>
 {% endblock content %}
-<hr/>
