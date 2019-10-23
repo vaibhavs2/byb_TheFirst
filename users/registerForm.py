@@ -26,3 +26,4 @@ class updateUserForm(forms.ModelForm):
     class Meta:
         model=Profile
         fields = ['name', 'number', 'address','landmark', 'pinCode','city', ]
+

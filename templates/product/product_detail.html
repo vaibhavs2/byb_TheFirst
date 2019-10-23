@@ -125,21 +125,29 @@ body{
             <!-- Indicators -->
             <ul class="carousel-indicators">
                 <li data-target="#demo" data-slide-to="0" class="active"></li>
+            {% if object.image_url1 %}
                 <li data-target="#demo" data-slide-to="1"></li>
+               {% endif %}
+               {% if  object.image_url2 %}
                 <li data-target="#demo" data-slide-to="2"></li>
+                {% endif %}
             </ul>
 
             <!-- The slideshow -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="{% static 'images/bookForweb.jpg'%}" alt="First">
+                <img src="{{object.image_url}}" alt="First">
                 </div>
+            {% if object.image_url1 %}
                 <div class="carousel-item">
-                <img src="{% static 'images/team.svg'%}"  alt="Second">
+                <img src="{{object.image_url1}}"  alt="Second">
                 </div>
+                {% endif %}
+                {% if  object.image_url2 %}
                 <div class="carousel-item">
-                <img src="{% static 'images/Iam.svg'%}" alt="Third">
+                <img src="{{object.image_url2}}" alt="Third">
                 </div>
+                {% endif %}
             </div>
 
             <!-- Left and right controls -->
@@ -153,23 +161,21 @@ body{
             </div>
     </div> <!--sdfghjkdfgjkl-->
     <div class="col-sm-7 col-12">
-        <div class="container bg-light ">
-        <h1>title of book</h1>
+        <div class="container  ">
+        <h1>{{object.book_name}}</h1>
         <div class="form-inline ">
-        <h5>Price</h5>
-        <h5 class="px-2" style="text-decoration-line: line-through">original price</h5>
+        <h5>Price: &#x20B9;{{object.price}}</h5>
+        {% if object.price_toshow %}
+        <h5 class="px-2" style="text-decoration-line: line-through">{{object.price_toshow}}</h5>
+            {% endif %}
             </div>
-<div class="form-inline ">
-    <h5>year of book</h5>
-    <h5 class="px-2">status new</h5>
-</div>
-
-<div class="form-inline">
-        <h5 >semester</h5>
-        <h5 class="px-2">branch</h5>
-</div>
-        
-        <small class="text-center">Elements after a floating element will flow around it. To avoid this, use the clear property or the clearfix hack (see example at the bottom of this page).</small><br><hr/>
+        <h5>{{object.branch}},</h5>
+        <h5>Semester: {{object.semester}}</h5>
+    <div class="form-inline ">
+        <h5>Year: {{object.year_of_book}},</h5>
+        <h5 class="px-2">{% if object.status_new %}new{% else %}used{% endif %}</h5>
+    </div>
+        <p class="text-center">{{object.description}}</p><br><hr>
         <input href="#" id="cBtn" type="button"  onclick="onClicked_Add()" class="btn btn-primary px-4" value="+ Cart">
         <a href="{% url 'theFirst:cart' %}" id="cart" type="button"  class="btn btn-success mx-2" >Your Cart</a>
         

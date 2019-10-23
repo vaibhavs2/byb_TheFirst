@@ -25,7 +25,7 @@ def profile(request):
         if updateForm.is_valid(): 
             updateForm.save()
             messages.success(request, f'Your crediantial has been Updated')
-            return redirect('profile')
+            return redirect('users:profile')
     else:
         updateForm = updateUserForm(instance=request.user.profile)
         context = {'updateForm':updateForm,}

@@ -135,4 +135,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'theFirst:index'
 # LOGIN_URL = 'login'
 LOGIN_URL = reverse_lazy('users:login')
- 
+EMAIL_HOST_USER = 'vaibhavk106@gmail.com' 
+#os.environ.get('EMAIL_USER') 
+EMAIL_HOST_PASSWORD = 'vhzcesfwlhjrtmje'
+ #os.environ.get('EMAIL_PASS')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 546
+EMAIL_USE_TLS = True

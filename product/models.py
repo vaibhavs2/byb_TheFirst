@@ -11,7 +11,7 @@ class Product(models.Model):
     image_url1 = models.CharField(max_length=2000, blank=True, null=True)
     image_url2= models.CharField(max_length=2000, blank=True, null=True)
     price = models.FloatField()
-    original_price = models.FloatField(null=True, blank=True)
+    price_toshow = models.FloatField(null=True, blank=True)
     stock = models.IntegerField()
     book_name = models.CharField(max_length=255)
     status_new = models.BooleanField(default=True) 

@@ -32,11 +32,8 @@
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                             <ul class=" nav navbar-nav  mr-auto mt-2 mt-lg-0" style="margin-left: 3%" >
                               <li class="nav-item active nav-item dropdown" >      
-                                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdownBuyLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #d4e6b6">Buy<span class="sr-only">(current)</span></a>
-                                  <div class="dropdown-menu" aria-labelledby="navbarDropdownBuyLink">
-                                          <a class="dropdown-item" style="color: black; font-family: 'Lacquer', sans-serif;font-weight: 100" href="{% url 'product:products' %}">Brand-New</a>
-                                          <a class="dropdown-item" style="color: rgb(6, 100, 56); font-family: 'Lacquer', sans-serif; font-weight: 100" href="{% url 'product:products' %}">Second-hand</a>
-                                        </div> <!-- dropdown menu-->
+                                  <a class="nav-link " href="{% url 'product:products' %}" id="navbarDropdownBuyLink" role="button"  style="color: #d4e6b6">Buy<span class="sr-only">(current)</span></a>
+                                 
                                   </li>
                                   <li class="nav-item active">
                                       <a class="nav-link active" href="{% url 'sellform' %}" title="hey!  You can sell old books too" style="color: #4bada6">Sell</a>

@@ -136,7 +136,7 @@
 {% block content %}
 <hr/>
 <div class="container-fluid" id="fluid">
-<input href="{% url 'theFirst:cart'%}" id="cartBtn" type="button"  class=" btn btn-primary btn-block btn-sm" value="Go to cart" style="display: none;">
+<a href="{% url 'theFirst:cart' %}" id="cartBtn" type="button"  class=" btn btn-primary btn-block btn-sm"  style="display: none;">Go to cart</a>
 
 <div class="row" id="row">
   {% for pro in products %}
@@ -145,7 +145,7 @@
       {% comment %} <img src="{{pro.image_url}}"  class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;"> {% endcomment %}
       <img id="currentPhoto" src="{{pro.image_url}}" onerror="this.onerror = null; this.src='{% static 'images/byb.svg' %}'" class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;">
           <h5 class="sameColor">{{pro.branch}}<span class="sem-ester" style="color: #F49F0A">({{pro.semester}})</span></h5>
-          <a href="{% url  'product:productDetail' %}" class="stretched-link"></a>
+          <a href="{% url  'product:productDetail' pro.id %}" class="stretched-link"></a>
           <div class="form-inline">
           <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
           <input href="#" id="cartBtn{{forloop.counter}}" type="button"  onclick="onClicked_Add({{forloop.counter}})" class="btn btn-outline-info btn-sm" value="+ cart" style="margin-left:auto; z-index:2; position:relative;">
@@ -153,6 +153,27 @@
     </div>
   </div>
   {% endfor %}
+</div>
+<div class="text-center mt-3">
+{% if is_paginated %}
+  {% if page_obj.has_previous %}
+    <a href="?page=1" class="mb-4 btn btn-outline-info btn-xs">First</a>
+    <a href="?page={{page_obj.previous_page_number}}" class=" mb-4 btn btn-outline-info btn-xs">Prev</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <a href="?page={{num}}" class="btn btn-info btn-xs mb-4">{{num}}</a>
+        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+        <a href="?page={{num}}" class="btn btn-outline-info btn-xs mb-4">{{num}}</a>
+        {% endif %}
+      {% endfor %}
+
+        {% if page_obj.has_next %}
+          <a href="?page={{page_obj.next_page_number}}" class="mb-4 btn btn-outline-info btn-xs">Next</a>
+          <a href="?page={{page_obj.paginator.num_pages}}" class=" mb-4 btn btn-outline-info btn-xs">Last</a>
+          {% endif %}
+{% endif %}
 </div>
 </div>
 
