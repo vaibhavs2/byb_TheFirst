@@ -10,8 +10,65 @@
 {% endblock links%}
 {% block extra_Style %}
 <style>
-html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
-  </style>
+html, body, h1, h4, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+  @media  screen and (min-width: 901px){
+        #price{
+          float:right;
+        }
+                        }
+
+@media screen  and (max-width: 900px) and (min-width: 661px){
+                     
+        #price{
+          float:right;
+        }
+            h4{
+        font-size: 18px;
+    }
+           
+      
+    }
+
+@media screen and (max-width: 660px) and (min-width: 321px){
+  
+        h4{
+        font-size: 18px;
+    }
+                 #price{
+          float:right;
+        }
+           
+            }
+
+    
+@media only screen and (max-width: 450px) and (min-width: 350px){
+   
+    h4{
+        font-size: 14px;
+    }
+    p{
+        font-size: 12px;
+    }
+             #price{
+          float:left;
+        }
+}
+@media only screen and (max-width: 350px){
+   
+
+    h4{
+        font-size: 14px;
+    }
+    p{
+        font-size: 12px;
+    }
+             #price{
+          float:left;
+        }
+
+}
+         
+</style>
 {% endblock extra_Style %}
 
 {% block content%}
@@ -30,7 +87,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
          <p class="w3-center"><img src="{% static '/images/team.svg' %}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>Username: {{user.username}}</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>Name: {{user.profile.name}}</p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>Name: {% if user.profile.name %}{{user.profile.name}} {% else %}<span style="color:red">Please fill Address form</span> {% endif %} </p>
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>City: {{user.profile.city}}</p>
         </div>
       </div>
@@ -43,7 +100,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <hr style="margin: 0%">
           <button class="w3-button w3-block w3-theme-l1 w3-left-align" onclick="openTab('address');"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Address</button>
           <hr style="margin: 0%">
-          <button class="w3-button w3-block w3-theme-l1 w3-left-align" onclick="openTab('password');"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Password</button>
+          <a button class="w3-button w3-block w3-theme-l1 w3-left-align" href ="{% url 'ChangePassword' %}"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Password</a>
           
         </div>      
       </div>
@@ -61,25 +118,25 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     </div>
     
     <!-- Middle Column -->
-    <div class="w3-col m7 containerTab" id="order">
+    <div class="w3-col  m9 l7 containerTab" id="order">
+      {% for order, item in orders %}
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="/w3images/avatar2.png" alt="product" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">1 min</span>
-        <h4>morrish mano<span>      @ &#x20B9;</span></h4>  <br>
-          
+        <img src="{{item.image_url}}" alt="product" class="w3-left  w3-margin-right" style="width:100px">
+        <span class="w3-right w3-opacity">{{order.order_Date}}</span><br>
+        <h4>{{item.book_name}}<br><span id="price" >@: &#x20B9;{{item.price}}</span></h4><br>
         <hr class="w3-clear">
-        <p>detail about the product  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>{% if item.description %}{{item.description}} {% else %}<span>No description for this Item{% endif %}</p>
           <div class="w3-row-padding" style="margin:0 -16px">
             <div class="w3-half">
-                <button type="button" data-toggle="collapse" data-target="#demop"  class="btn btn-light btn-lg btn-block">Return</button>
+                <button type="button" data-toggle="collapse" data-target="#demop"  class="btn btn-light btn-small btn-block">Return</button>
             </div>
             <div class="w3-half">
-                <button type="button" data-toggle="collapse" data-target="#demop" class="btn btn-light btn-lg btn-block">Replace</button>
+                <button type="button" data-toggle="collapse" data-target="#demop" class="btn btn-light btn-small btn-block">Replace</button>
           </div>
           <h5 id="demop" class="collapse card" style="padding: 2%">Kindely wait for this service , we are in process!</h5>
         </div>
       </div>
-      
+      {% endfor %}
     
     </div>
     <!-- the second one -->
@@ -99,21 +156,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
 
-<!-- the third one -->
-      <div class="w3-col m7 containerTab" style="display:none;" id="password">
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-           
-            
-          <hr class="w3-clear">
-          <p>detail about the product  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <div class="w3-row-padding" style="margin:0 -16px">
-              <div class="w3-half">
-                  <button type="button"  class="btn btn-light btn-lg btn-block">Update</button>
-              </div>
-        </div>
-        </div>
-      <!-- End Middle Column -->
-      </div>
+
     
   <!-- End Grid -->
   </div>

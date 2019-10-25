@@ -51,6 +51,11 @@
         object-fit: contain;
         width:100%;
         height:325px; }
+
+
+        #sellUs{
+        margin-top: 2%;
+    }
                     }
 
 @media screen  and (max-width: 900px) and (min-width: 661px){
@@ -62,7 +67,9 @@
         object-fit: contain;
         width:100%;
         height:325px; }
-    
+
+        #sellUs{
+        margin-top: 2%;}
 }
 @media screen and (max-width: 660px) and (min-width: 321px){
     body{
@@ -73,6 +80,9 @@
         object-fit: contain;
         width:100%;
         height:225px; }
+
+        #sellUs{
+        margin-top: 2%;}
      }
 
 
@@ -81,7 +91,8 @@ body{
             padding-top:20%;
             padding-bottom: 50%;
         }
-
+        #sellUs{
+        margin-top: 2%;}
 }
 @media only screen and (max-width: 350px){
 body{
@@ -103,10 +114,10 @@ body{
         -o-transform:scale(1.8);
         transform:scale(1.8);
     }
-
-
-
-}
+    #sellUs{
+        margin-top: 2%;
+    }
+        }
 
 
  .carousel-indicators li {
@@ -176,10 +187,21 @@ body{
         <h5 class="px-2">{% if object.status_new %}new{% else %}used{% endif %}</h5>
     </div>
         <p class="text-center">{{object.description}}</p><br><hr>
-        <input href="#" id="cBtn" type="button"  onclick="onClicked_Add()" class="btn btn-primary px-4" value="+ Cart">
-        <a href="{% url 'theFirst:cart' %}" id="cart" type="button"  class="btn btn-success mx-2" >Your Cart</a>
         
+            {% if object.stock %}
+                <input href="#" id="cBtn" type="button"  onclick="onClicked_Add()" class="btn btn-primary px-4" value="+ Cart">
+              {% else %}
+                <input href="#" id="cBtn" disabled type="button" class="btn btn-danger px-4" value="Sold">
+            {% endif %}
+        <a href="{% url 'theFirst:cart' %}" id="cart"  role="button" class="btn btn-success mx-2" >Your Cart</a>
     </div>
+    {% if object.stock %}
+
+    {% else %}
+  <div class="container" id="sellUs">
+        <small >If you have this, you can <a href="{% url 'sellform' %}">sell us</a></small>
+    </div>
+        {% endif %}
     </div>
 </div>
 </div>

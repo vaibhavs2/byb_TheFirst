@@ -22,8 +22,10 @@ class UserRegistrationForm (UserCreationForm):
         self.fields.pop('password2')
 
 
+
 class updateUserForm(forms.ModelForm):
+    number = forms.CharField(widget=forms.TextInput(attrs={'type':'number'}))
+    pinCode = forms.CharField(widget=forms.TextInput(attrs={'type':'number'}))
     class Meta:
         model=Profile
         fields = ['name', 'number', 'address','landmark', 'pinCode','city', ]
-

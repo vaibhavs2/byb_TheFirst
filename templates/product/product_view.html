@@ -148,7 +148,12 @@
           <a href="{% url  'product:productDetail' pro.id %}" class="stretched-link"></a>
           <div class="form-inline">
           <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
-          <input href="#" id="cartBtn{{forloop.counter}}" type="button"  onclick="onClicked_Add({{forloop.counter}})" class="btn btn-outline-info btn-sm" value="+ cart" style="margin-left:auto; z-index:2; position:relative;">
+          {% if pro.stock %}
+              <input href="#" id="cartBtn{{forloop.counter}}" type="button"  onclick="onClicked_Add({{forloop.counter}})" class="btn btn-outline-info btn-sm" value="+ cart" style="margin-left:auto; z-index:2; position:relative;">
+              {% else %}
+                <input href="#" id="cartBtn{{forloop.counter}}" type="button" disabled  class="btn btn-danger btn-sm" value="Sold" style="margin-left:auto; z-index:2; position:relative;">
+            {% endif %}
+     
       </div>
     </div>
   </div>

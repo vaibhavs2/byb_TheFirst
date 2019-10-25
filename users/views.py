@@ -1,8 +1,11 @@
 from django.shortcuts import render , redirect
 from django.contrib import messages
-from users.registerForm import UserRegistrationForm, updateUserForm
+from .models import UserOrders
+from product.models import Product
+from users.registerForm import UserRegistrationForm, updateUserForm 
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.forms import PasswordChangeForm    
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 def register(request):
@@ -12,7 +15,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username').split()
             messages.success(request, f'Account Created for {username[0]}! Please LogIn with your credential')
-            return redirect('index')
+            return redirect('theFirst:index')
     else:
         form = UserRegistrationForm()
     return render (request, 'user/register.html',{'form': form})
@@ -28,7 +31,15 @@ def profile(request):
             return redirect('users:profile')
     else:
         updateForm = updateUserForm(instance=request.user.profile)
-        context = {'updateForm':updateForm,}
+        orders = UserOrders.objects.filter(user__id=request.user.id).order_by('-order_Date')
+        id_list = []
+        for r in orders:
+            id_list.append(int(r.product_id))
+        user_product = Product.objects.filter(id__in = id_list)
+        order_to_show = zip(orders, user_product)
+        context = {'updateForm':updateForm,
+                    'orders':order_to_show,
+                    }
     return render(request, 'user/profile.html', context)
 
 
