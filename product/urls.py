@@ -20,6 +20,6 @@ from .views import ProductListView, ProductDetailView
 from  django.conf.urls import url
 urlpatterns = [
     path('', ProductListView.as_view(), name='products'),
-    path('<str:pk>', ProductDetailView.as_view(), name='productDetail'),
+    path('detail/<str:pk>', ProductDetailView.as_view(), name='productDetail'),
     # path('detail/' ,views.product_detail ,name='productDetail'),
 ]

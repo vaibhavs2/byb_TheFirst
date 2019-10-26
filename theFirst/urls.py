@@ -16,7 +16,9 @@ Including another URLconf
 
 from django.urls import path
 from theFirst import views
-from  django.conf.urls import url
+from django.conf.urls import url
+from product.views import ProductDetailView
+from .views import ProductFilteredListView
 app_name = 'theFirst'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -25,4 +27,6 @@ urlpatterns = [
     path('privacy/',views.privacy_page, name ='privacy'),
     path('about_us/', views.aboutUs_page,name='aboutUs'),
     path('cart/', views.cart_page, name='cart'),
+    path('product/detail/<str:pk>', ProductDetailView.as_view(), name='productDetail'),
+    path('product/branch/<str:branch_id>',ProductFilteredListView.as_view(),name='filterd'),
 ]

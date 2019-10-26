@@ -1,7 +1,5 @@
 from django.db import models
 
-
-
 choice=(  
         ('I', "sem I"),
         ('II', "sem II"),
@@ -30,12 +28,4 @@ class GoodDeals(models.Model):
         return self.branch.branches
         
 
-class bestSelling(models.Model):
-    branch = models.ForeignKey(branch, on_delete=models.CASCADE)
-    semester = models.CharField(default='I',max_length=11, choices=choice)
-    bookName = models.CharField(max_length = 120)
-    bookPrice = models.FloatField()
-    newedition = models.BooleanField(default=True)
-    InStock = models.SmallIntegerField( default=1)
-    def __str__(self):
-        return self.bookName
+

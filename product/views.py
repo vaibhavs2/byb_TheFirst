@@ -19,15 +19,10 @@ class ProductListView(ListView):
     # def get_queryset(self):
     # return Product.objects.filter(user=self.request.user.)
 
-# class ProductFilterListView(ListView):
-#     model = Product
-#     template_name = 'product/product_view.html'
-#     context_object_name = 'products'
-#     ordering = ['?', ]
-#     paginate_by = 20
 
 class ProductDetailView(DetailView):
     model = Product
+    template_name = 'product/product_detail.html'
 
 # def product_detail(request):
 #     return render(request, 'product/product_detail.html') 
