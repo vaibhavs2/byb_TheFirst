@@ -3,11 +3,11 @@ from product.models import Product, bestSelling
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('book_name','branch','semester','year_of_book','price' ,'stock','status_new',)
+    list_display = ('id','book_name','branch','semester','year_of_book','price' ,'stock','status_new',)
 
 class bestSellingAdmin(admin.ModelAdmin):
     model=bestSelling
-    list_display = ('book_name', 'price', 'stock')
+    list_display = ('books_id','book_name', 'price', 'stock')
 
     def book_name(self, obj):
         return obj.books.book_name

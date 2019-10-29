@@ -26,7 +26,6 @@ urlpatterns = [
     path('careers/',views.career_page, name='career'),
     path('privacy/',views.privacy_page, name ='privacy'),
     path('about_us/', views.aboutUs_page,name='aboutUs'),
-    path('cart/', views.cart_page, name='cart'),
     path('product/detail/<str:pk>', ProductDetailView.as_view(), name='productDetail'),
     path('product/branch/<str:branch_id>',ProductFilteredListView.as_view(),name='filterd'),
 ]

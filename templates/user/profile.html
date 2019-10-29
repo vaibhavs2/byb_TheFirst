@@ -119,6 +119,7 @@ html, body, h1, h4, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     
     <!-- Middle Column -->
     <div class="w3-col  m9 l7 containerTab" id="order">
+    {% if check_if_ordered %}
       {% for order, item in orders %}
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="{{item.image_url}}" alt="product" class="w3-left  w3-margin-right" style="width:100px">
@@ -137,6 +138,11 @@ html, body, h1, h4, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
       {% endfor %}
+    {% else %}
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <h4>You haven't ordered anything yet!</h4>
+      </div>
+      {% endif %}
     
     </div>
     <!-- the second one -->

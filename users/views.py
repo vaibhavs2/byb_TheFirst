@@ -33,12 +33,16 @@ def profile(request):
         updateForm = updateUserForm(instance=request.user.profile)
         orders = UserOrders.objects.filter(user__id=request.user.id).order_by('-order_Date')
         id_list = []
-        for r in orders:
-            id_list.append(int(r.product_id))
-        user_product = Product.objects.filter(id__in = id_list)
+        try:
+            for r in orders:
+                id_list.append(int(r.product_id))
+            user_product = Product.objects.filter(id__in = id_list)
+        except TypeError:
+            user_product=[]
         order_to_show = zip(orders, user_product)
         context = {'updateForm':updateForm,
                     'orders':order_to_show,
+                    'check_if_ordered':user_product,
                     }
     return render(request, 'user/profile.html', context)
 

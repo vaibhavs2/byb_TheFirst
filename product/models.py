@@ -21,8 +21,12 @@ class Product(models.Model):
     description = models.CharField(max_length=1000, null=True, blank=True)
     def __str__(self):
         return self.book_name
-
+        
 class bestSelling(models.Model):
     books = models.OneToOneField(Product, on_delete=models.CASCADE)
     def __str__(self):
         return self.books.book_name
+
+
+
+    

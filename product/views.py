@@ -1,6 +1,8 @@
 from django.shortcuts import render , get_object_or_404
 from django.views.generic import ListView, DetailView
 from product.models import Product
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -15,6 +17,7 @@ class ProductListView(ListView):
     context_object_name = 'products'
     ordering = ['?', ]
     paginate_by = 20
+    
 
     # def get_queryset(self):
     # return Product.objects.filter(user=self.request.user.)
@@ -26,3 +29,4 @@ class ProductDetailView(DetailView):
 
 # def product_detail(request):
 #     return render(request, 'product/product_detail.html') 
+
