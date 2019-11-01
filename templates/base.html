@@ -22,10 +22,9 @@
       <div role="navigation" >
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                   <a class="navbar-brand" id="logotext" href="{% url 'theFirst:index' %}"><span style="color: #badeae">B</span><span style="color: #527b81">u</span><span style="color:#d4e6b6 ">y</span> <span style="color:#778174">y</span><span style="color:#4bada6 ">o</span><span style="color: #d4e6b6">u</span><span style="color: #9de0ad">r</span> <span style="color: #44ada8"> B</span>oo<span style="color:#547981">k</span></a>               
-                  <form class="form-inline ml-auto my-2 my-lg-0" role="search">
-                      <input class="form-control mr-sm-2" type="search" id="searchBox" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success search-button  my-1 my-sm-0" type="submit"><i class="fa fa-search " style="color: white"></i></button>
-                    
+                  <form class="form-inline ml-auto my-2 my-lg-0" role="search", method="GET" action="{% url 'product:search_result' %}">
+                      <input class="form-control mr-sm-2"  id="searchBox" name="searchBox"  placeholder="Search" aria-label="Search">
+                      <button id="searchBtn" class="btn btn-outline-success search-button  my-1 my-sm-0" type="submit"><i class="fa fa-search" style="color: white"></i></button>
                         </form>
                     
                   <button class="navbar-toggler" id="toggler1" type="button" data-toggle="collapse" id="navbarIcon" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"><span  class="fas fa-bars"></span>
@@ -92,6 +91,6 @@
 
   </body>
   {% block javascript %}
-
+  
 {% endblock javascript %}
   </html>

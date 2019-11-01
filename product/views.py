@@ -23,19 +23,27 @@ class ProductListView(ListView):
     context_object_name = 'products'
     ordering = ['-id']
     paginate_by = 20
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         if self.request.user.is_authenticated:
             context['cart_listId'] = OrderItem.objects.filter(user=self.request.user, is_ordered=False).values_list('product_id',flat=True)
-            return context
+            
         else: 
             context['cart_listId']=OrderItem.objects.none()
-            return context
+        return context
 
     # def get_queryset(self):
     # return Product.objects.filter(user=self.request.user.)
+def searchItems(request):
+    context={}
+    if request.method == 'GET':
+        search_query = request.GET['searchBox']
+        context={'products':Product.objects.filter(book_name__icontains=search_query),}
+        
+    return render(request, 'product/product_view.html',context)
 
 
 class ProductDetailView(DetailView):
