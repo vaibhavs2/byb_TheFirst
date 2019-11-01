@@ -8,6 +8,7 @@
           <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif&display=swap" rel="stylesheet">        
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+          <script src="{% static 'css/bootstrap/jquery-3.4.1.min.js' %}"></script>
           <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           <link href="https://fonts.googleapis.com/css?family=Lacquer|Merienda&display=swap" rel="stylesheet">
@@ -52,7 +53,7 @@
                                           <li class="nav-item active" style="margin: auto"><a href="{% url 'users:login'%}" style="color: #F49F0A; ; margin: 8px"><span><img src="{% static 'images/signinIcon.svg' %}" height="30px" width="30px" alt=""></span>LogIn</a></li>
                                           {% endif %}
 
-                                          <li class="nav-item active" style="margin: auto"><a href="" style="text-decoration: none; margin-left: 15px; color:#F49F0A" class="dropdown-toggle" role="button"><img src="{% static 'images/cart.svg' %}" alt="" width="30px" height="30px"><span id="itemNumber">7</span></a></li>
+                                          <li class="nav-item active" style="margin: auto"><a href="{% url 'cart:yo' %}" style="text-decoration: none; margin-left: 15px; color:#F49F0A" class="dropdown-toggle" role="button"><img src="{% static 'images/cart.svg' %}" alt="" width="30px" height="30px"><span id="itemNumber">{{items_inCart}}</span></a></li>
                                           </ul>
                                       
                                     </div>    <!-- toolbar options-->  
@@ -86,5 +87,11 @@
               </div>
             </footer>
           
+
+
+
   </body>
+  {% block javascript %}
+
+{% endblock javascript %}
   </html>

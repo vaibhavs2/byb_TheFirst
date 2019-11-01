@@ -4,6 +4,7 @@ from product.models import Product, bestSelling
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id','book_name','branch','semester','year_of_book','price' ,'stock','status_new',)
+    search_fields = ['id','book_name', 'branch__branches', 'semester']
 
 class bestSellingAdmin(admin.ModelAdmin):
     model=bestSelling

@@ -1,5 +1,4 @@
- 
-{% extends "base.html" %}
+ {% extends "base.html" %}
 {% block title %}cart{% endblock title %}
 {% block extra_Style %}
 <style>
@@ -115,11 +114,10 @@
  </div>
 {% endblock %}
 
-{% block scripts %}
-  {{ block.super }}
+{% block javascript %}
   <script>
   function confirm_delete(){
     return confirm("Do you want to remove this item from cart?");
   }
   </script>
-{% endblock scripts %}
+{% endblock javascript %}

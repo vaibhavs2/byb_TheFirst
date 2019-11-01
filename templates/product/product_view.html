@@ -5,6 +5,7 @@
     body{
         background-color:#343a40;
     }
+
     .footer {
    display: none;}
    .products .card {
@@ -149,10 +150,18 @@
           <div class="form-inline">
           <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
           {% if pro.stock %}
-              <input href="#" id="cartBtn{{forloop.counter}}" type="button"  onclick="onClicked_Add({{forloop.counter}})" class="btn btn-outline-info btn-sm" value="+ cart" style="margin-left:auto; z-index:2; position:relative;">
-              {% else %}
-                <input href="#" id="cartBtn{{forloop.counter}}" type="button" disabled  class="btn btn-danger btn-sm" value="Sold" style="margin-left:auto; z-index:2; position:relative;">
-            {% endif %}
+                  {% if request.user.is_authenticated %}
+                        {% if pro.id in cart_listId %}
+                              <a id="cartBtn{{pro.id}}"  href="{% url 'cart:yo' %}"  class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;">Go to cart</a>
+                            {% else %}
+                            <a id="cartBtn{{pro.id}}"  onclick="onClicked_Add({{pro.id}})" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
+                            {% endif %}
+                    {% else %}
+                      <a href="{% url 'users:login' %}" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
+                      {% endif %}
+            {% else %}
+              <input href="#" id="cartBtn{{forloop.counter}}" type="button" disabled  class="btn btn-danger btn-sm" value="Sold" style="margin-left:auto; z-index:2; position:relative;">
+          {% endif %}
      
       </div>
     </div>
@@ -182,18 +191,23 @@
 </div>
 </div>
 
-<script>
-function onClicked_Add(buttonId) {
-  var stat = document.getElementById("cartBtn"+buttonId);
-  if (stat.value=="+ cart")
-    document.getElementById("cartBtn"+buttonId).value = "Added";
-  else 
-  document.getElementById("cartBtn"+buttonId).value = "+ cart";
-  if(window.innerWidth > 992)
-    document.getElementById("cartBtn").style.display = 'none';
-  else
-    document.getElementById("cartBtn").style.display = 'block';
-  
-}
-</script>
 {% endblock content %}
+
+{% block javascript %}
+  <script>
+  function onClicked_Add(btnId){
+  $.ajax({
+    url:"add-to-cart/",
+    data: {
+      'itemId':btnId,
+    },
+    dataType: 'json',
+    success: function(data){
+      $("#cartBtn"+btnId).text("Go to cart").attr("href", "{% url 'cart:yo' %}");
+      $("#itemNumber").text({{items_inCart}});
+    }
+  });
+  }
+
+  </script>
+{% endblock javascript %}

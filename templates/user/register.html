@@ -66,3 +66,40 @@ body{
     </div>
 
 {% endblock content %}
+
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      var username = $(this).val();
+      $.ajax({
+        url: "{% url 'users:validate_user' %}",
+        data:{
+            'username':username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            $("#hint_id_username").text("username taken!").css("color", "red");
+          }
+          else
+          {
+              $("#hint_id_username").text("username available! ").css("color", "green");
+          }
+        }
+      });
+
+    });
+
+previousVal = "";
+function InputChangeListener()
+{
+  if($('id_username').val()
+     != previousVal)
+  {
+   previousVal  = $('#id_username').val();
+   $('#id_username').change();    
+  }
+}
+setInterval(InputChangeListener, 1500);
+  </script>
+{% endblock javascript %}

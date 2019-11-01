@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sell.apps.SellConfig',
     'product.apps.ProductConfig',
+    'cart.apps.CartConfig',
     
 ]
 
@@ -71,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.number_of_item_in_cart',
             ],
         },
     },

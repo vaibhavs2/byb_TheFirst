@@ -15,11 +15,11 @@ Including another URLconf
 """
 app_name = 'product'
 from django.urls import path
-from product import views
-from .views import ProductListView, ProductDetailView
-from  django.conf.urls import url
+from product.views import ProductListView, ProductDetailView, add_to_cart
+
 urlpatterns = [
     path('', ProductListView.as_view(), name='products'),
     path('detail/<str:pk>', ProductDetailView.as_view(), name='productDetail'),
+    path('add-to-cart/',add_to_cart, name='add_To_cart'),
        # path('detail/' ,views.product_detail ,name='productDetail'),
 ]
