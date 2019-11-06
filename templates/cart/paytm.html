@@ -40,5 +40,18 @@ body{
 {% endblock extra_Style %}
 
 {% block content %}
-<h1>the cart page</h1>
+
+<h1>Redirecting you to the merchant....</h1>
+<h1>Please do not refresh your page....</h1>
+<form action="https://securegw-stage.paytm.in/order/process" method="post" name="paytm">
+    {% for key, value in parameter_dict_paytm.items %}
+    <input type="hidden" name="{{key}}" value="{{value}}">
+    {% endfor %}
+
+</form>
+
+<script>
+document.paytm.submit()
+</script>
+
 {% endblock content %}

@@ -189,11 +189,15 @@ body{
         <p class="text-center">{% if object.description %}{{object.description}} {% else %}No description {% endif %} </p><br><hr>
         
             {% if object.stock %}
-                <input href="#" id="cBtn" type="button"  onclick="onClicked_Add()" class="btn btn-primary px-4" value="+ Cart">
-              {% else %}
+                    {% if object.id in cart_listId %}
+                        <input href="#" id="cBtn{{object.id}}" type="button"  class="btn btn-primary px-4" value="Added">
+                        {% else %}
+                          <button href="#" id="cBtn{{object.id}}" role="button" onclick="onClicked_Add({{object.id}}); this.disabled=true;" class="btn btn-primary px-4" >+ Cart</button>
+                    {% endif %}
+            {% else %}
                 <input href="#" id="cBtn" disabled type="button" class="btn btn-danger px-4" value="Sold">
             {% endif %}
-        <a href="" id="cart"  role="button" class="btn btn-success mx-2" >Your Cart</a>
+        <a href="{% url 'cart:yo'%}" id="cart"  role="button" class="btn btn-success mx-2" >Your Cart</a>
     </div>
     {% if object.stock %}
 
@@ -208,14 +212,49 @@ body{
 
 
 
-<script>
-function onClicked_Add() {
-        var stat = document.getElementById("cBtn");
-        if (stat.value=="+ Cart")
-            document.getElementById("cBtn").value = "Added";
-        else 
-          document.getElementById("cBtn").value = "+ Cart";
-          
-        }
-        </script>
 {% endblock content %}
+
+
+
+{% block javascript %}
+
+<script>
+   function product_update(){
+     var v=[]
+        v.push({{object.id}})
+    $.ajax({
+      url:"{% url 'product:filter_product_stock' %}",
+      data: { 'products': v.toString()
+      },
+      dataType: 'json',
+      success: function(data){
+        var b=data['filtered_stock_list']
+
+          $("#cBtn"+b).text("Sold").prop('disabled', true).removeClass('btn-outline-info').addClass('btn-danger');
+          console.log("#cBtn"+b)
+        
+        console.log(b)      
+            }
+        });
+  }
+  setInterval(product_update, 3000);
+  </script>
+
+
+  <script>
+  function onClicked_Add(btnId){
+  $.ajax({
+    url:"{% url 'product:add_To_cart'%}",
+    data: {
+      'itemId':btnId,
+    },
+    dataType: 'json',
+    success: function(data){
+      $("#cBtn"+btnId).text("Added");
+      $("#itemlen").text(data['item_len']['items_inCart']);
+    }
+  });
+  }
+
+  </script>
+{% endblock javascript %}

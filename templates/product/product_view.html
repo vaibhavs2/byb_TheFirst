@@ -154,13 +154,13 @@
                         {% if pro.id in cart_listId %}
                               <a id="cartBtn{{pro.id}}"  href="{% url 'cart:yo' %}"  class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;">Go to cart</a>
                             {% else %}
-                            <a id="cartBtn{{pro.id}}"  onclick="onClicked_Add({{pro.id}})" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
+                            <a id="cartBtn{{pro.id}}" role= "button" onclick="onClicked_Add({{pro.id}})" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
                             {% endif %}
                     {% else %}
                       <a href="{% url 'users:login' %}" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
                       {% endif %}
             {% else %}
-              <input href="#" id="cartBtn{{forloop.counter}}" type="button" disabled  class="btn btn-danger btn-sm" value="Sold" style="margin-left:auto; z-index:2; position:relative;">
+              <input href="#" id="cartBtn{{pro.id}}" type="button" disabled  class="btn btn-danger btn-sm" value="Sold" style="margin-left:auto; z-index:2; position:relative;">
           {% endif %}
      
       </div>
@@ -194,20 +194,49 @@
 {% endblock content %}
 
 {% block javascript %}
+  
+
+  <script>
+   function product_update(){
+     var v=[]
+     {%for r in products %}
+        v.push({{r.id|add:"0"}})
+      {% endfor %}
+    $.ajax({
+      url:"{% url 'product:filter_product_stock' %}",
+      data: { 'products': v.toString()
+      },
+      dataType: 'json', 
+      success: function(data){
+        var b=data['filtered_stock_list']
+        list_item= b.split(",")
+        for( var i=0; i<list_item.length; i++){
+          $("#cartBtn"+list_item[i]).text("Sold").prop('disabled', true).removeClass('btn-outline-info').addClass('btn-danger');
+          console.log("#cartBtn"+list_item[i])
+        }
+        console.log(b)      
+            }
+        });
+  }
+  setInterval(product_update, 3500);
+  </script>
+
+
   <script>
   function onClicked_Add(btnId){
   $.ajax({
-    url:"add-to-cart/",
+    url:"{% url 'product:add_To_cart' %}",
     data: {
       'itemId':btnId,
     },
     dataType: 'json',
     success: function(data){
       $("#cartBtn"+btnId).text("Go to cart").attr("href", "{% url 'cart:yo' %}");
-      $("#itemNumber").text({{items_inCart}});
+      $("#itemlen").text(data['item_len']['items_inCart']);
     }
   });
-  }
+  }  
 
   </script>
+  
 {% endblock javascript %}

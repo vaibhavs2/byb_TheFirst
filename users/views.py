@@ -4,7 +4,7 @@ from .models import UserOrders
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from product.models import Product
-from users.registerForm import UserRegistrationForm, updateUserForm 
+from users.registerForm import UserRegistrationForm, updateUserForm , updateEmail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm    
 from django.contrib.auth import update_session_auth_hash
@@ -26,13 +26,17 @@ def register(request):
 def profile(request):
     if request.method == 'POST':
         updateForm = updateUserForm(request.POST, instance=request.user.profile)
-        context = {'updateForm':updateForm,}
-        if updateForm.is_valid(): 
+        update_email = updateEmail(request.POST, instance=request.user)
+        context = {'updateForm':updateForm,
+        'update_email': update_email,}
+        if updateForm.is_valid() and update_email.is_valid():
             updateForm.save()
+            update_email.save()
             messages.success(request, f'Your crediantial has been Updated')
             return redirect('users:profile')
     else:
         updateForm = updateUserForm(instance=request.user.profile)
+        update_email = updateEmail( instance=request.user)
         orders = UserOrders.objects.filter(user__id=request.user.id).order_by('-order_Date')
         id_list = []
         try:
@@ -43,10 +47,31 @@ def profile(request):
             user_product=[]
         order_to_show = zip(orders, user_product)
         context = {'updateForm':updateForm,
+                    'update_email': update_email,
                     'orders':order_to_show,
                     'check_if_ordered':user_product,
                     }
     return render(request, 'user/profile.html', context)
+
+
+
+
+@login_required
+def userEmailUpdate(request):
+    if request.method == 'POST':
+        
+        context = {'updateForm':update_email,}
+        if update_email.is_valid(): 
+            update_email.save()
+            messages.success(request, f'Your crediantial has been Updated')
+            return redirect('users:profile')
+    else:
+        update_email = updateEmail(instance=request.user)
+        
+        context = {'update_email':update_email,
+                    }
+    return render(request, 'user/profile.html', context)
+
 
 
 def terms_condition(request):

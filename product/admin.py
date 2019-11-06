@@ -15,7 +15,7 @@ class bestSellingAdmin(admin.ModelAdmin):
     book_name.short_description = 'Product Name'
 
     def price(self, obj):
-        return obj.books.semester
+        return obj.books.price
     price.short_description = 'price'
 
     def stock(self, obj):

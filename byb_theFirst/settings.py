@@ -145,3 +145,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 546
 EMAIL_USE_TLS = True
+
+PAYTM_MERCHANT_KEY = "DdcomvfFMPmuldb0"
+PAYTM_MERCHANT_ID = "UimHaW30514512296865"
+HOST_URL = "http://localhost:8080"
+PAYTM_CALLBACK_URL = "/paytm/response/"
