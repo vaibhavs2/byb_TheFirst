@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
  {% block links %}
- <link rel="stylesheet"  type"text/css"  href="{% static  'css/index.css' %}" >
+    <link rel="stylesheet"  type"text/css"  href="{% static  'css/index.css' %}" />
  {% endblock links %}
+
+ {% block extra_Style %}
+  <style>
+  #myfooter{
+    padding-top:20px;
+  }
+  </style>
+  {% endblock extra_Style %}
         {% block content %}
           <div id="carouselFirst" class="carousel slide" data-ride="carousel" >
               <ol class="carousel-indicators">
@@ -58,30 +66,24 @@
                               
                                 <!-- The slideshow -->
                                 <div class="carousel-inner carousel2" >
-                                {% for deal in gooddeals %}
-                                    {% if deal.bookSets %}
+                                {% for set in book_set %}
                                           <div class="carousel-item card {% cycle 'active' '' '' %} ">
-                                            <img src="{{ deal.ImageUrl }}" alt="Los Angeles" >
+                                            <img src="{% static 'images/yo.jpg' %}" width="100%" alt="book" style="opacity: 1; object-fit: contain;"> 
                                             <div class="container-fluid form-inline" >
-                                            <h5 style=" margin-left:1.2%;" id="subjectSet">{{ deal.branch }}({{ deal.semester }})</h6>
-                                              <h5 class="h5"  style=" margin-left: 2%"><span >@ &#x20B9;</span><span id="setPrice">{{ deal.priceTosell }}</span> <span id="disPrice" style="text-decoration-line: line-through">{{ deal.priceTOshow }}</span></h5>
+                                            <h5 style=" margin-left:1.2%;" id="subjectSet">{{ set.branch }}({{ set.semester }})</h6>
                                               <span href="#" class="pointer" data-toggle="collapse" data-target="#demo1" id="downArrow" style="color: black;  margin-left: 3%;padding-top: 0px;"><i class="fas fa-angle-down" data-toggle="tooltip" data-placement="top" title="Description"></i></span>
-                                               {% if deal.InStock %}
-                                                <button type="button"  class="btn btn-outline-success" >
-                                                <span id="addTocart;" >Add to cart</span>
-                                                </button>
+                                              <h5 class="h5"  style=" margin-left: 2%"><span >@ &#x20B9;</span><span id="setPrice">{{ set.priceTosell }}</span> <span id="disPrice" style="text-decoration-line: line-through">{{ set.priceTOshow }}</span></h5>
+                                              {% if set.InStock %}
+                                                <button type="button"  class="btn btn-outline-success btn-xs" ><span id="addTocart;">Buy</span></button>
                                                {% else %}
-                                                <button type="button"  class="btn btn-outline-danger" disabled >
-                                                <span id="addTocart;">Sold Out</span>
-                                                </button>
+                                                <button type="button"  class="btn btn-outline-danger" disabled ><span id="addTocart;">Sold Out</span></button>
                                                 {% endif %}
                                               
                                               <div class="collapse" id="demo1">
-                                                  <div class="card"><h5>{{ deal.description }}</h5></div>
+                                                  <div class="card"><h5>{{ set.description }}</h5></div>
                                                 </div>
                                             </div>
                                           </div>
-                                      {% endif %}
                                 {% endfor %}                   
                                 </div>
                               
@@ -97,19 +99,17 @@
                         </div><!-- 8th part of screen for showcase books, major part-->
                         <div class="col-sm-4 col-12 dealDivider dealDivider2"  >
                       <div class="row">
-                        {% for deal in gooddeals %}
-                        {% if deal.bookSets == False %}
+                        {% for book, branch in single_book %}
                           <div class="col-6 col-sm-12 dealDivider2">
                             <div class="card" id="cardYellow">
-                              <img src="{{deal.ImageUrl}}" alt="book" >
+                              <img src="{% static 'images/yo.jpg' %}" width="100%" alt="book" style="opacity: 1; object-fit: contain;" >
                               <div class="container-fluid form-inline" >
-                              <h5 id="bookName1" >Old <span style="font-weight: bold" id="branch" data-toggle="tooltip" data-placement="top" title="Mechanical engneering">C.E</span>, Ms Ross</h5>
-                              <h5><span class="h5">@ &#x20B9;</span><span class="h5" id="price">240</span> <span class="h5" style="text-decoration-line: line-through">400</span></h5>
-                              <button type="button" class="btn btn-outline-success"><span id="addTocart;" >Add</span></button>
+                              <h5 id="bookName1"><span style="font-weight: 500" id="branch" data-toggle="tooltip" data-placement="top" title="Mechanical engneering">{{branch}}({{ book.semester }})</span></h5>
+                              <h5><span class="h5 float-center">&#160;@ &#x20B9;</span><span class="h5" id="price">{{book.priceTosell}}</span> <span class="h5" style="text-decoration-line: line-through">{{book.priceTOshow}}</span></h5>
+                              <button type="button" class="btn btn-outline-success"><span id="addTocart;" >Buy</span></button>
                             </div>
                               </div>
                             </div>
-                            {% endif %}
                         {% endfor %}
                           </div>
                           </div><!-- to show single books 4ht part of screen-->
@@ -119,16 +119,20 @@
             </div> <!--good deals-->
 
             <div class="branch-table">
-            <div class="container-fluid" style="font-family: 'Merienda', cursive;"> <!-- list of books branches wise and best sellings-->
-                <div class="jumbotron"  style="background-color: white;">
-                      
+            <div class="container-fluid" style="font-family: 'Merienda', cursive; padding:0px; "> <!-- list of books branches wise and best sellings-->
+                <div class="jumbotron bg-dark" style="margin-bottom: 2px;">
+                      <div class="explore-product">
+                      <h4 style="color:#F08700">Explore our Products</h4>  
+                      <a href="/product" role="button"class="btn btn-info btn-block">Click Here</a>
+                      </div>
+                      <hr/>
                   <div class="row">
                       <div class="column col-12 col-sm-6">
-                          <h4>Books by branch</h4>  
-                        <ul>
+                          <h4 style="color:#F08700">Books by branch</h4>  
+                        <ul class= "links">
                 
                           {% for branch in branches %}
-                              <li><a href="">{{ branch.branches }}</a></li>
+                              <li><a href="{% url 'theFirst:filterd' branch.id %}" >{{ branch.branches }}</a></li>
                               {% endfor %}
                               <ul>
                                 <li>And more... you can search in Topbar</li>
@@ -136,10 +140,10 @@
                         </ul>
                       </div>
                       <div class="column col-12 col-sm-6" >
-                          <h4>Best sellings</h4>
-                          <ul>
-                          {% for best in bestSelling%}
-                            <li><a href="">{{best.bookName}}(<span style="color:black">{{best.semester}}</span>)</a><span class="prince h5"> :&#x20B9;{{best.bookPrice}}</span> <span class="condition h5">{% if best.newedition%}New{% else %}Used{% endif %}</span></li>
+                          <h4 style="color:#F08700">Best sellings</h4>
+                          <ul class="links">
+                          {% for best in bestSelling %}
+                            <li><a href="{% url 'theFirst:productDetail' best.books.id %}">{{best.books.book_name}}(<span style="color:white">{{best.books.semester}}</span>)<span class="prince h5"> :&#x20B9;{{best.books.price}}</span> <span class="condition h5">{% if best.books.status_new %}New{% else %}Used{% endif %}</span></a></li>
                           {% endfor %}
                             </ul>
 
@@ -149,6 +153,7 @@
                 
               </div>
             </div><!--branch table end-->
+         
 
         {% endblock content %}
 

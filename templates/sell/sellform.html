@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% block title %} sell{% endblock title %}
 {% block extra_Style %}
+<style>
 .footer{display:none}
 .infor-mation h4, h5{color: #358692;}
 
@@ -30,6 +31,7 @@
              .infor-mation li{font-size: .7rem;}
              
         }
+        </style>
 {% endblock extra_Style %}
 
 {% block content %}
@@ -38,7 +40,7 @@
     {% csrf_token %}
     <fieldset class ="form-group">
     <legend class ="border-bottom mb-4">Sell your Books!</legend>
-    <h5 style="color:#F08700"> we will pay you upto 55% of cost price of your books, if conditions met</h4>
+    <h5 style="color:#F08700"> we will pay you up-to 55% of cost price of your books, if conditions met</h4>
     <div class="jumbotron container infor-mation">
     <h4>Must read</h4><hr>
     <li>If you have more than one books please submit request for only one book, our excecutive will handle all at your door, while picking it up.</li>

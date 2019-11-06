@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block extra_Style %}
+<style>
+        .footer {
+  display:none;
+}
+
+ @media  screen and (min-width: 901px){
+    body{
+    padding-top:4%;
+            }
+                    }
+
+@media screen  and (max-width: 900px) and (min-width: 661px){
+                    body{
+            padding-top:7%;
+        }
+    
+}
+@media screen and (max-width: 660px) and (min-width: 321px){
+    body{
+            padding-top:10%;
+        }
+        
+     }
+
+
+@media only screen and (max-width: 450px) and (min-width: 350px){
+body{
+            padding-top:18%;
+        }
+}
+@media only screen and (max-width: 350px){
+body{
+        padding-top:22%;}
+
+}    
+        
+</style>
+{% endblock extra_Style %}
+
+{% block content %}
+<h1>the cart page</h1>
+{% endblock content %}

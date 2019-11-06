@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from sell.sellForms import sellform
 from sell.models import sell_order
+from django.contrib.auth import views as auth_views
 from django.shortcuts import get_object_or_404
 
 # Create your views here.

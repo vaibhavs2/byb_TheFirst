@@ -1,36 +1,213 @@
 {% extends 'base.html' %}
-{% load staticfiles%}
-{% block links%}
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-{% endblock links%}
+{% load static %}
 {% block extra_Style %}
+<style>
     body{
-        padding-top:5%;
+        background-color:#343a40;
     }
+
+    .footer {
+   display: none;}
+   .product-Class .card {
+       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+       transition: 0.3s;
+          }
+
+    .product-Class .card:hover {
+            box-shadow: 0 10px 30px 10px rgb(0, 0, 0);}
     
+    .sameColor{
+      color: #53e9da;
+      font-weight: 500;
+    }
+   
+    @media  screen and (min-width: 901px){
+        body{
+        padding-top:5%;
+                }
+        .card{border-width: 12px;}
+        .product-Class{
+          padding :0.25rem;
+        }
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .product-Class h5{
+      font-size: 16px;
+    }
+        .sem-ester{
+          font-size: 12.5px;
+        }
+        .sameColor{
+          font-size: 15px;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        }
+         }
+@media screen  and (max-width: 900px) and (min-width: 661px){
+        body{
+             padding-top:7%; }
+        .card{border-width: 10px;}
+        .product-Class{
+          padding :0.14rem; }
+          #fluid{padding-left: 5px;
+          padding-right: 5px;}
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .product-Class h5{
+      font-size: 14px;
+    }
+        .sem-ester{
+          font-size: 12.5px;
+        }
+        .sameColor{
+          font-size: 14px;
+           margin-bottom: 6px;
+          margin-top: 6px;
+        }
+      
+          }
+@media screen and (max-width: 660px) and (min-width: 321px){
+          body{
+             padding-top:13%;}
+        .card{border-width: 10px;}
+        .product-Class{
+          padding :0.10rem; }
+
+          #fluid{padding-left: 3px;
+          padding-right: 3px;}
+
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;}
+
+        .product-Class h5{
+      font-size: 13px;}
+
+        .sem-ester{
+          font-size: 12px;}
+        .btn-sm{
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+        .sameColor{
+          font-size: 12px;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        }
+          }
+@media only screen and (max-width: 320px) {
+                body{
+             padding-top:16%;}
+             
+        .card{border-width: 10px;}
+        .product-Class{
+          padding :0.10rem; }
+
+          #fluid{padding-left: 3px;
+          padding-right: 3px;}
+
+        #row{
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;}
+
+        .product-Class h5{
+      font-size: 13px;}
+
+        .sem-ester{
+          font-size: 12px;}
+        .btn-sm{
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+        .sameColor{
+          font-size: 12px;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        }
+            }
+
+</style>
+
 {% endblock extra_Style %}
 
 {% block content %}
+<hr/>
+<div class="container-fluid" id="fluid">
+<a href="" id="cartBtn" type="button"  class=" btn btn-primary btn-block btn-sm"  style="display: none;">Go to cart</a>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<div class="card col-4">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{% static 'images/team.svg' %}">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      <p><a href="#">This is a link</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+<div class="row" id="row">
+  {% for pro in products %}
+  <div class="col-sm-3  col-6 product-Class">
+    <div class="card h-100 rounded border-dark bg-dark text-center" style="border-bottom-width: 0px;">
+      {% comment %} <img src="{{pro.image_url}}"  class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;"> {% endcomment %}
+      <img id="currentPhoto" src="{{pro.image_url}}" onerror="this.onerror = null; this.src='{% static 'images/byb.svg' %}'" class="card-img-top" alt="..." style="opacity: 1; object-fit: contain;">
+          <h5 class="sameColor">{{pro.branch}}<span class="sem-ester" style="color: #F49F0A">({{pro.semester}})</span></h5>
+          <a href="{% url  'product:productDetail' pro.id %}" class="stretched-link"></a>
+          <div class="form-inline">
+          <p class="sameColor">@ &#x20B9;{{pro.price}}</p>
+          {% if pro.stock %}
+                  {% if request.user.is_authenticated %}
+                        {% if pro.id in cart_listId %}
+                              <a id="cartBtn{{pro.id}}"  href="{% url 'cart:yo' %}"  class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;">Go to cart</a>
+                            {% else %}
+                            <a id="cartBtn{{pro.id}}"  onclick="onClicked_Add({{pro.id}})" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
+                            {% endif %}
+                    {% else %}
+                      <a href="{% url 'users:login' %}" class="btn btn-outline-info btn-sm"  style="margin-left:auto; z-index:2; position:relative;"> +cart</a>
+                      {% endif %}
+            {% else %}
+              <input href="#" id="cartBtn{{forloop.counter}}" type="button" disabled  class="btn btn-danger btn-sm" value="Sold" style="margin-left:auto; z-index:2; position:relative;">
+          {% endif %}
+     
+      </div>
     </div>
   </div>
+  {% endfor %}
+</div>
+<div class="text-center mt-3">
+{% if is_paginated %}
+  {% if page_obj.has_previous %}
+    <a href="?page=1" class="mb-4 btn btn-outline-info btn-xs">First</a>
+    <a href="?page={{page_obj.previous_page_number}}" class=" mb-4 btn btn-outline-info btn-xs">Prev</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <a href="?page={{num}}" class="btn btn-info btn-xs mb-4">{{num}}</a>
+        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+        <a href="?page={{num}}" class="btn btn-outline-info btn-xs mb-4">{{num}}</a>
+        {% endif %}
+      {% endfor %}
+
+        {% if page_obj.has_next %}
+          <a href="?page={{page_obj.next_page_number}}" class="mb-4 btn btn-outline-info btn-xs">Next</a>
+          <a href="?page={{page_obj.paginator.num_pages}}" class=" mb-4 btn btn-outline-info btn-xs">Last</a>
+          {% endif %}
+{% endif %}
+</div>
+</div>
+
 {% endblock content %}
+
+{% block javascript %}
+  <script>
+  function onClicked_Add(btnId){
+  $.ajax({
+    url:"add-to-cart/",
+    data: {
+      'itemId':btnId,
+    },
+    dataType: 'json',
+    success: function(data){
+      $("#cartBtn"+btnId).text("Go to cart").attr("href", "{% url 'cart:yo' %}");
+      $("#itemNumber").text({{items_inCart}});
+    }
+  });
+  }
+
+  </script>
+{% endblock javascript %}

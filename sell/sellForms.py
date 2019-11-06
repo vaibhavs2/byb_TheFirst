@@ -16,7 +16,7 @@ class sellform(forms.ModelForm):
         self.fields['branch'].empty_label = '--choose please--'
         
     def clean(self):
-
+        
         cbranch = self.cleaned_data['branch']
         csem = self.cleaned_data['semester']
         try:

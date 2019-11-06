@@ -15,20 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from theFirst import views
-from users import views as user_views
-from django.contrib.auth import views as auth_views
 from sell import views as sell_views
-from product.views import product_view
-from  django.conf.urls import url, include
+from  django.conf.urls import include
+from django.contrib.auth import views as auth_views
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    url(r'theFirst/',include('theFirst.urls')),
-    path('signUp/', user_views.register,name='register'),
-    path('logIn/', auth_views.LoginView.as_view(template_name = 'user/login.html'),name='login'),
-    path('logOut/', auth_views.LogoutView.as_view(template_name = 'user/logout.html') ,name='logout'),
-    path('profile/', user_views.profile, name = 'profile'),
+    path('sriKrishna/', admin.site.urls),
+    path('',include('theFirst.urls')),
     path('sell/',sell_views.sellIndex, name = 'sellform' ),
-    path('product/',product_view, name="products"),
+    path('product/',include('product.urls')),
+    path('user/', include('users.urls')),
+    path('cart/', include('cart.urls')),
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name = 'user/password_reset.html'), name='password_reset'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name = 'user/password_reset_done.html'), name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name = 'user/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name = 'user/password_reset_complete.html'), name='password_reset_complete'),
+    path('change-password/', auth_views.PasswordChangeView.as_view(template_name = 'user/passwordChange.html'), name='ChangePassword'),
+    path('password-change-done/', auth_views.PasswordChangeDoneView.as_view(template_name = 'user/password_reset_complete.html'), name='password_change_done'),
 ]

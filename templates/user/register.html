@@ -1,22 +1,49 @@
 
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LogIn</title>
-    
-    <link rel="stylesheet" href=" {% static 'css/bootstrap/bootstrap.min.css' %}">
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-          
-</head>
-<body>
+{% block title %}signUp{% endblock title %}
+{% block extra_Style %}
+<style>
+    .footer {
+            display:none;}
+        
+@media  screen and (min-width: 901px){
+    body{
+    padding-top:4%;
+            }
+                    }
 
+@media screen  and (max-width: 900px) and (min-width: 661px){
+                    body{
+            padding-top:7%;
+        }
+    
+}
+@media screen and (max-width: 660px) and (min-width: 321px){
+    body{
+            padding-top:10%;
+        }
+        
+     }
+
+
+@media only screen and (max-width: 450px) and (min-width: 350px){
+body{
+            padding-top:18%;
+        }
+}
+@media only screen and (max-width: 350px){
+body{
+        padding-top:22%;}
+
+}    
+</style>
+{% endblock extra_Style %}
+
+
+
+{% block content %}
     <div class = "content-section jumbotron container" style="background-color:white">
     <form method="POST">
     {% csrf_token %}
@@ -27,16 +54,52 @@
     <div class = "form-group">
         <button class = "btn btn-outline-info" type="submit" >Sign Up!</button>
            <div>
-     <small class = "test-muted">By creating an account you agree to our<a class ="ml-2" href="#">Terms & Privacy.</a>
+     <small class = "test-muted">By creating an account you agree to our<a class ="ml-2" href="{% url 'users:terms'%}">Terms & Privacy.</a></small>
     </div>
         </div>
     </form>
  
     <div class="border-top pt-3">
-        <small class = "test-muted">Already Have an Account?<a class ="ml-2" href="#" style="font-size:16px">Sign In</a>
-        </small>
+        <small class = "test-muted">Already Have an Account?<a class ="ml-2" href="{% url 'users:login'%}">sign In</a></small>
     </div>
 
     </div>
-</body>
-</html>
+
+{% endblock content %}
+
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      var username = $(this).val();
+      $.ajax({
+        url: "{% url 'users:validate_user' %}",
+        data:{
+            'username':username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            $("#hint_id_username").text("username taken!").css("color", "red");
+          }
+          else
+          {
+              $("#hint_id_username").text("username available! ").css("color", "green");
+          }
+        }
+      });
+
+    });
+
+previousVal = "";
+function InputChangeListener()
+{
+  if($('id_username').val()
+     != previousVal)
+  {
+   previousVal  = $('#id_username').val();
+   $('#id_username').change();    
+  }
+}
+setInterval(InputChangeListener, 1500);
+  </script>
+{% endblock javascript %}
