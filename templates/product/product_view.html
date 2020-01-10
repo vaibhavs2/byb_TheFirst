@@ -199,7 +199,7 @@
   <script>
    function product_update(){
      var v=[]
-     {%for r in products %}
+     {% for r in products %}
         v.push({{r.id|add:"0"}})
       {% endfor %}
     $.ajax({
