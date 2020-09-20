@@ -1,30 +1,31 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
+{% load crispy_forms_tags %}
+
 {% block extra_Style %}
 <style>
     .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        padding-top:10px;
+        display: none;
         }
 
   @media  screen and (min-width: 901px){
         body{
         padding-top:4%;
+        padding-bottom: 10%;
                 }
                         }
 
 @media screen  and (max-width: 900px) and (min-width: 661px){
                       body{
              padding-top:7%;
+             padding-bottom: 18%;
          }
       
     }
 @media screen and (max-width: 660px) and (min-width: 321px){
         body{
              padding-top:10%;
+             padding-bottom: 14%;
          }
     
          
@@ -34,6 +35,7 @@
 @media only screen and (max-width: 450px) and (min-width: 350px){
     body{
              padding-top:18%;
+             padding-bottom: 22%;
          }
     #proceed{
       margin-top:2%;
@@ -41,57 +43,110 @@
 }
 @media only screen and (max-width: 350px){
     body{
-            padding-top:22%;}
+            padding-top:22%;
+            padding-bottom: 24%;}
 
     #proceed{
       margin-top:3%;
     }
 
 }
+
+
         
 </style>
 {% endblock extra_Style %}
-{% block content %}
 
- <section>
-  <div class="container-fluid jumbotron bg-white">  
-    <h4>Order Summary</h4> 
-  <table class="table">
-          <td>
-            {% for item in order.get_cart_items %}
-              <tr>
-                <td>{{ item }}</td>
-                <td>R {{ item.product.price }}</td>
-              </tr>
-            {% endfor %}
-          </td>
-        
-        <tr>
-          <td><strong>Order Total</strong> </td>
-          <td> <strong>R {{ order.get_cart_total }}</strong></td>
-        </tr>
-      </table>
-        {% comment %} <form method="POST" action="{% url 'cart:process_payment' order.id %}">
-          {% csrf_token %}
-          <button style="width: 50%; float: left;" class="btn btn-warning">Pay with card</button>
-          
-        </form>
-        <!-- for another day -->
-        <form method="POST" action="{% url 'cart:process_payment' order.id %}">
-          {% csrf_token %}
-          <button style="width: 50%; float: right;" class="btn btn-primary">Pay with Paypal</button>
-        </form> {% endcomment %}
+{% block content %}
+  <main>
+    <div class="container">
+      <h3 class="my-5 text-center" style="margin-bottom: 10px">Checkout</h3>
+      <hr>
+      <div class="row">
+          <div class="bg-white d-block col-md-4 mb-4">
+              <div class="card">
+               <table class="table  text-center">
+               <thead>
+                 <tr >
+                   <th scope="col">Item</th>
+                   <th scope="col">Price</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 {% for item in order.get_cart_items %}
+                   <tr>
+                     <td>
+                       {{ item.product.book_name }}
+                       </span>
+                     </td>
+                     <td>&#x20B9;{{ item.product.price }}</td>
+                   </tr>
+                 {% endfor %}
+                 <tr>
+                   {% if order.get_cart_total != None %}
+                   <td class="text-center" colspan=2>
+                     <strong class="float-right" style="color: green">Total:&#160;&#160; &#x20B9;{{ order.get_cart_total }}</strong>
+                   </td>
+                   {% endif %}
+                 </tr>
+                 
+                 </tbody>
+               </table>
+              </div>
+                  
+              </div>
+        <!--  -->
+        <div class="col-md-8 mb-4">
+          <div class="card">
+          <div class="card-body"><br>
+          <form method="POST" enctype="multipart/form-data ">
+            {% csrf_token %}
+            <h3>Shipping address</h3>
+            <fieldset class ="form-group">
+                {{update_email|crispy}}
+                {{ updateForm|crispy }}
+            </feildset>
+            <div class = "form-group">
+                <button class = "btn btn-success b btn-block" id="confirmBtn" type="submit" >Confirm address</button>
+                </div>
+            </form>
+        </div>              
+
+             <div class="d-block my-3 container">              
+                <div class="custom-control custom-radio">
+                  <input id="paytm" name="payment_option" value="PayTm" type="radio" class="custom-control-input" required>
+                  <label class="custom-control-label" for="paytm">PayTm - Online Payment (use paytm wallet, UPI, ect.,)</label>
+                </div>
+                <br>
+                <div class="custom-control custom-radio">
+                  <input id="cod" name="payment_option" value="COD" type="radio" class="custom-control-input" required>
+                  <label class="custom-control-label" for="cod">Cash on delivery</label>
+                </div>
+
+              <hr class="mb-4">
+              <a  href="" class="btn btn-primary btn-block" id="checkoutBtn">Continue to checkout</a>
+          </div>
+        </div>
+      </div>
+<!--  -->
     </div>
-  <!-- </form> -->
- </section>
+
+    </div>
+  </main>
+
 {% endblock content %}
 
-{% block scripts %}
-  {{ block.super }}
+{% block javascript %}
+<script>
 
-  <!-- initialize jQuery Library -->
-  <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-  <!-- Bootstrap jQuery -->
-  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-      
-{% endblock scripts %}
+$("input[name='payment_option']").change(function(){
+if ($('input[name=payment_option]:checked').val() == "COD"){
+  $("#checkoutBtn").attr("href", "{% url 'cart:order_confirm' %}");}
+else{
+  $("#checkoutBtn").attr("href", "{% url 'cart:checkout_to_payment' %}");
+}
+                          });
+
+
+</script>
+  {% endblock javascript %}

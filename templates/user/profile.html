@@ -152,7 +152,9 @@ html, body, h1, h4, h3, h4, h5 {font-family: "Open Sans", sans-serif}
             {% csrf_token %}
             <fieldset class ="form-group">
             <legend class ="border-bottom mb-4">update your Address</legend>
+            {{update_email|crispy}}
             {{ updateForm|crispy }}
+            
             </feildset>
             <div class = "form-group">
                 <button class = "btn btn-outline-success" type="submit" >Submit</button>

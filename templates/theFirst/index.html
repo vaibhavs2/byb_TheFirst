@@ -74,9 +74,9 @@
                                               <span href="#" class="pointer" data-toggle="collapse" data-target="#demo1" id="downArrow" style="color: black;  margin-left: 3%;padding-top: 0px;"><i class="fas fa-angle-down" data-toggle="tooltip" data-placement="top" title="Description"></i></span>
                                               <h5 class="h5"  style=" margin-left: 2%"><span >@ &#x20B9;</span><span id="setPrice">{{ set.priceTosell }}</span> <span id="disPrice" style="text-decoration-line: line-through">{{ set.priceTOshow }}</span></h5>
                                               {% if set.InStock %}
-                                                <button type="button"  class="btn btn-outline-success btn-xs" ><span id="addTocart;">Buy</span></button>
+                                                <a class="btn btn-outline-success btn-xs" id="addTocart{{set.id}}" ><span id="addTocart">Buy</span></a>
                                                {% else %}
-                                                <button type="button"  class="btn btn-outline-danger" disabled ><span id="addTocart;">Sold Out</span></button>
+                                                <button type="button"  class="btn btn-outline-danger" disabled ><span id="addTocart">Sold Out</span></button>
                                                 {% endif %}
                                               
                                               <div class="collapse" id="demo1">
@@ -106,7 +106,7 @@
                               <div class="container-fluid form-inline" >
                               <h5 id="bookName1"><span style="font-weight: 500" id="branch" data-toggle="tooltip" data-placement="top" title="Mechanical engneering">{{branch}}({{ book.semester }})</span></h5>
                               <h5><span class="h5 float-center">&#160;@ &#x20B9;</span><span class="h5" id="price">{{book.priceTosell}}</span> <span class="h5" style="text-decoration-line: line-through">{{book.priceTOshow}}</span></h5>
-                              <button type="button" class="btn btn-outline-success"><span id="addTocart;" >Buy</span></button>
+                              <a class="btn btn-outline-success" href="addTocart{{book.id}}" ><span id="addTocart" >Buy</span></a>
                             </div>
                               </div>
                             </div>
@@ -157,6 +157,12 @@
 
         {% endblock content %}
 
+          {% block javascript %}
+          
+  
+
+ 
+          {% endblock javascript %}
           
 
                                    <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->

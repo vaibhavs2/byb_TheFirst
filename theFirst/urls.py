@@ -21,7 +21,7 @@ from product.views import ProductDetailView
 from .views import ProductFilteredListView
 app_name = 'theFirst'
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    path('', views.index, name='index'),
     path('help/',views.help_page, name='help'),
     path('careers/',views.career_page, name='career'),
     path('privacy/',views.privacy_page, name ='privacy'),

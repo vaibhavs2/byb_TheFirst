@@ -106,7 +106,7 @@
           </div>
           <div class="col-12 col-sm-6" id="proceed">
           {% if order.get_cart_items %}
-            <a href="" class="float-right btn btn-primary">Proceed To Checkout</a>
+            <a href="{% url 'cart:checkout' %}" class="float-right btn btn-primary">Proceed To Checkout</a>
           {% endif %}
     </div>
         </div>
@@ -114,10 +114,3 @@
  </div>
 {% endblock %}
 
-{% block javascript %}
-  <script>
-  function confirm_delete(){
-    return confirm("Do you want to remove this item from cart?");
-  }
-  </script>
-{% endblock javascript %}

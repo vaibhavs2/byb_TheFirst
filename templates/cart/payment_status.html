@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block extra_Style %}
+<style> 
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   padding-top:10px;
+}
+
+  .help{
+      color:white;
+     margin-bottom: 0px;
+  }
+  @media  screen and (min-width: 901px){
+        body{
+        padding-top:4%;
+                }
+        .help{
+                padding-top: 7%;}
+         }
+@media screen  and (max-width: 900px) and (min-width: 661px){
+                      body{
+             padding-top:7%;
+         }
+         .help{
+    padding-top: 20%;
+}
+      
+          }
+@media screen and (max-width: 660px) and (min-width: 321px){
+                  body{
+             padding-top:8%;
+         }
+.help{
+    padding-top: 20%;
+}
+          }
+@media only screen and (max-width: 320px) {
+                body{
+             padding-top:18%;}
+             
+        }
+    
+@media only screen and (max-width: 450px) and (min-width: 350px){
+
+    .help h5{
+        font-size: 15px;
+    }
+    .help p{
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 350px){
+
+    .help h5{
+        font-size: 13px;
+    }
+    .help p{
+        font-size: 11px;
+    }
+}
+
+
+</style>
+{% endblock extra_Style %}
+{% block content %}
+<div class=" help jumbotron bg-dark text-center">
+ {{response}}
+
+<h5>Payment status regarding your order Id {{response.ORDERID}}</h5></hr>
+       {% if response.RESPCODE == '01' %}
+        ORDER SUCCESS
+        {% else %}
+        ORDER FAILURE
+<h4>Try Cash on delivery option if any error Occurred</h4>
+        {% endif%}
+<hr>
+<h4>Mail us at <span style="color:#8bf8ed">vaibhavk106@ducic.ac.in</h5>
+
+<p>Click <a style="color:#F49F0A" href="/theFirst">Here</a> redirect to the home page<p>
+
+</div>
+<div class="relative" style="padding-bottom:80%; background:#A4F9C8 ">
+</div>
+{% endblock content %}
